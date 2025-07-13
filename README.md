@@ -266,7 +266,7 @@ Filter messages by tag like `calendar`, `greeting`, `unrelated`, etc.
 
 ```json
 {
-  "tag": "important"
+  "tags": ["rent", "summary"]
 }
 ```
 
@@ -284,6 +284,21 @@ Filter messages by tag like `calendar`, `greeting`, `unrelated`, etc.
 Used for development and testing resets.
 
 ---
+
+
+### ⚙️ Internal Design Limits
+
+📌 Org Boundaries: Agent only responds to rent, CRM, calendar, and uploaded document topics.
+
+🌐 Language Handling: Automatically translates non-English inputs to English using langdetect & deep-translator, but:
+
+If the original message is under 20 characters, translation is skipped to preserve intent.
+
+🧠 Out-of-Scope Filtering: Uses Gemini + fallback heuristics to detect unsupported queries.
+
+🗓️ Calendar Conflict Check: New event creation is blocked if time overlaps with existing events.
+
+🧠 RAG Scope: check_scope_with_context() uses Gemini to determine if retrieved chunks can answer the question.
 
 
 ---
