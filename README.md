@@ -115,7 +115,7 @@ Upload a supported file and check for `"File uploaded and processed successfully
 * **Database:** MongoDB
 
 ---
-###🚀 How to Run the App
+##🚀 How to Run the App
 
 ✅ 1. Clone the Repository
 
