@@ -174,8 +174,12 @@ Use MongoDB Compass to view data (optional).
 
 ✅ 5. Run the FastAPI Server
 
+    *run in root 
+    cd multi_agent_chatbot
+    cd multi_agent_chatbot
+
     uvicorn app.main:app --reload
-    
+
     Server will start on:📍 http://localhost:8000
 
 ✅ 6. Access Swagger UI for API Testing
