@@ -68,6 +68,17 @@ Upload a supported file and check for `"File uploaded and processed successfully
 * `PUT /user/update_user/{user_id}`
 * `DELETE /user/delete_user/{user_id}`
 
+👥 Guest User Handling
+
+If user_id is not provided in the /chat/gemini request, a guest user will automatically be created with the format:
+
+{
+  "user_id": "guest-<uuid>",
+  "is_guest": true
+}
+
+This is inserted into the users_collection in MongoDB
+
 ---
 
 ### 🔹 Conversation History + Tag Management
@@ -119,15 +130,10 @@ Upload a supported file and check for `"File uploaded and processed successfully
 
 ✅ 1. Clone the Repository
 
-    git clone https://github.com/your-username/multi-agent-chatbot.git
+    git clone https://github.com/Sreekarr29/Multi-Agentic-Conversational-AI-System
     cd multi-agent-chatbot
 
 ✅ 2. Set Up Virtual Environment (Recommended)
-
-    python -m venv venv
-    venv\Scripts\activate  # On Windows
-    # OR
-    source venv/bin/activate  # On Mac/Linux
 
 ✅ 3. Install Dependencies
 
@@ -142,6 +148,29 @@ Create a .env file in the root folder and add your API keys:
     GEMINI_API_KEY=your_google_gemini_api_key
     OPENAI_API_KEY=yor_api_key
     MONGO_URI=mongodb://localhost:27017
+
+🗄️ Database: MongoDB Setup
+
+🧪 What DB Are We Using?
+
+We use MongoDB to manage user profiles, conversations, and calendar events.
+
+⚙️ Instructions to Run MongoDB Locally
+
+Install MongoDB:
+
+MongoDB Community Edition
+
+Start MongoDB Server:
+
+mongod --dbpath /your/local/dbpath
+
+Your app connects using:
+
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB_NAME=multi_agent_ai_db
+
+Use MongoDB Compass to view data (optional).
 
 ✅ 5. Run the FastAPI Server
 
