@@ -115,6 +115,50 @@ Upload a supported file and check for `"File uploaded and processed successfully
 * **Database:** MongoDB
 
 ---
+###🚀 How to Run the App
+
+✅ 1. Clone the Repository
+
+    git clone https://github.com/your-username/multi-agent-chatbot.git
+    cd multi-agent-chatbot
+
+✅ 2. Set Up Virtual Environment (Recommended)
+
+    python -m venv venv
+    venv\Scripts\activate  # On Windows
+    # OR
+    source venv/bin/activate  # On Mac/Linux
+
+✅ 3. Install Dependencies
+
+    pip install -r requirements.txt
+
+Make sure you have Python 3.10 or 3.11 installed (avoid Python 3.12 for now due to some package issues).
+
+✅ 4. Create .env File
+
+Create a .env file in the root folder and add your API keys:
+
+    GEMINI_API_KEY=your_google_gemini_api_key
+    OPENAI_API_KEY=yor_api_key
+    MONGO_URI=mongodb://localhost:27017
+
+✅ 5. Run the FastAPI Server
+
+    uvicorn app.main:app --reload
+    
+    Server will start on:📍 http://localhost:8000
+
+✅ 6. Access Swagger UI for API Testing
+
+📘 Open your browser:http://localhost:8000/docsYou can test all endpoints from there, including:
+
+POST /chat/gemini
+
+POST /upload_docs/
+
+GET /calendar/user_events/{user_id}... and more!
+---
 
 ## 🧪 Testing Endpoints
 
