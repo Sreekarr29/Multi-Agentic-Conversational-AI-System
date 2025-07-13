@@ -3,6 +3,12 @@
 An intelligent, multilingual, and multi-modal assistant powered by Retrieval-Augmented Generation (RAG), Gemini LLM, a CRM database, and calendar integration.
 
 ---
+## 📦 Installation
+
+```bash
+pip install -r requirements.txt
+```
+---
 
 ## 🚀 Features Implemented
 
@@ -304,14 +310,6 @@ app/
 
 ---
 
-## 📦 Installation
-
-```bash
-pip install -r requirements.txt
-```
-
-
----
 
 
 
