@@ -110,61 +110,85 @@ Upload a supported file and check for `"File uploaded and processed successfully
 
 ---
 
-🧪 Testing Endpoints
-Use Swagger UI at http://localhost:8000/docs or test via Postman using the examples below:
+## 🧪 Testing Endpoints
 
-📬 Chat with Gemini (RAG + Calendar + Language Support)
-POST /chat/gemini
+You can test the API using:
 
-json
-Copy
-Edit
+* 🔍 **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+* 📬 **Postman**: Use the examples below with `http://localhost:8000`
+
+---
+
+### 🤖 POST `/chat/gemini` – Gemini Chat Endpoint (RAG + Language + Calendar)
+
+**Request:**
+
+```json
 {
   "user_id": "test123",
   "message": "What is the lowest rent for Broadway properties?"
 }
-Calendar scheduling (with conflict check)
+```
 
-json
-Copy
-Edit
-{
-  "user_id": "test123",
-  "message": "Schedule a meeting with John tomorrow at 3pm"
-}
-Greeting intent
+✅ **Tests:**
 
-json
-Copy
-Edit
-{
-  "user_id": "test123",
-  "message": "Hi there!"
-}
-Multi-language input (translated automatically)
+* 💬 Regular rent/property query (uses RAG)
+* 📅 Schedule a meeting:
 
-json
-Copy
-Edit
-{
-  "user_id": "test123",
-  "message": "Hola, ¿cuál es la propiedad más barata?"
-}
-📤 Upload Documents (PDF, TXT, CSV, DOCX)
-POST /upload_docs/
-Form-Data:
+  ```json
+  {
+    "user_id": "test123",
+    "message": "Schedule a meeting with John tomorrow at 3pm"
+  }
+  ```
+* 🌍 Non-English input (auto-translated):
 
-file: (choose file like sample.csv or sample.pdf)
+  ```json
+  {
+    "user_id": "test123",
+    "message": "Hola, ¿cuál es la propiedad más barata?"
+  }
+  ```
+* 👋 Greetings intent:
 
-📅 Calendar Endpoints
+  ```json
+  {
+    "user_id": "test123",
+    "message": "Hi there!"
+  }
+  ```
+
+---
+
+### 📁 POST `/upload_docs/` – Upload Documents
+
+**Content-Type:** `multipart/form-data`
+**Field:**
+
+```
+file: (upload a .pdf, .txt, .csv, or .docx file)
+```
+
+✅ **Tests:**
+
+* Upload `sample.csv` or `sample.pdf`
+* The file will be parsed and indexed for RAG
+
+---
+
+### 📅 Calendar API
+
+#### GET `/calendar/user_events/<user_id>`
+
+Example:
+
+```
 GET /calendar/user_events/test123
-Fetch all scheduled events for the user.
+```
 
-POST /calendar/create_event
+#### POST `/calendar/create_event`
 
-json
-Copy
-Edit
+```json
 {
   "user_id": "test123",
   "title": "Team Sync",
@@ -172,71 +196,89 @@ Edit
   "datetime": "2025-07-20T10:00:00",
   "conversation_id": "abc-123"
 }
-PUT /calendar/update_event/<event_id>
-Update event info:
+```
 
-json
-Copy
-Edit
+#### PUT `/calendar/update_event/<event_id>`
+
+```json
 {
-  "title": "Team Sync Updated",
+  "title": "Updated Team Sync",
   "datetime": "2025-07-21T11:00:00"
 }
-DELETE /calendar/delete_event/<event_id>
-Remove a scheduled calendar event.
+```
 
-👤 User Endpoints
-POST /crm/create_user
+#### DELETE `/calendar/delete_event/<event_id>`
 
-json
-Copy
-Edit
+✅ **Tests:**
+
+* Try to schedule overlapping event — it should detect conflict
+* Create, update, and delete events
+
+---
+
+### 👤 User Management API
+
+#### POST `/crm/create_user`
+
+```json
 {
   "user_id": "test123",
   "name": "Test User",
   "email": "test@example.com"
 }
-PUT /crm/update_user/test123
+```
 
-json
-Copy
-Edit
+#### PUT `/crm/update_user/<user_id>`
+
+```json
 {
-  "email": "updated@example.com"
+  "email": "new_email@example.com"
 }
-DELETE /crm/delete_user/test123
-Removes user and all related data.
+```
 
-💬 Conversation Management
-GET /crm/conversations/test123
-Get all conversations by a user.
+#### DELETE `/crm/delete_user/<user_id>`
 
-GET /crm/conversations/filter_by_tag?tag=calendar
-Filter all conversations tagged as "calendar".
+✅ **Tests:**
 
-PUT /crm/update_tag/<conversation_id>
+* Create a new user
+* Update their email
+* Delete the user and verify removal
 
-json
-Copy
-Edit
+---
+
+### 💬 Conversation API
+
+#### GET `/crm/conversations/<user_id>`
+
+Fetch all messages for the user.
+
+#### GET `/crm/conversations/filter_by_tag?tag=calendar`
+
+Filter messages by tag like `calendar`, `greeting`, `unrelated`, etc.
+
+#### PUT `/crm/update_tag/<conversation_id>`
+
+```json
 {
   "new_tag": "important"
 }
-🧼 Reset the System
-POST /reset
-This will delete all:
+```
 
-Documents
+✅ **Tests:**
 
-Vectors
+* Query all messages
+* Filter by tag (e.g. calendar)
+* Update tag on specific conversation
 
-Users
+---
 
-Conversations
+### 🧼 POST `/reset` – Reset All Data
 
-Calendar events
+**Dangerous – clears all user, document, calendar and chat history!**
+Used for development and testing resets.
 
-Use with caution in dev/testing environments.
+---
+
 
 ---
 
