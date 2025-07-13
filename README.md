@@ -131,7 +131,8 @@ This is inserted into the users_collection in MongoDB
 ✅ 1. Clone the Repository
 
     git clone https://github.com/Sreekarr29/Multi-Agentic-Conversational-AI-System
-    cd multi-agent-chatbot
+    cd multi_agent_chatbot
+    cd multi_agent_chatbot
 
 ✅ 2. Set Up Virtual Environment (Recommended)
 
