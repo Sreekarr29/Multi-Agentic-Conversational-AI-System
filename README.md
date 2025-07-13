@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 ### 🔹 Upload Document Endpoint (`POST /upload_docs/`)
 
-* Uploads `.pdf`, `.txt`, `.csv`, `.doc`, `.docx` files.
+* Uploads `.pdf`, `.txt`, `.csv` files.
 * Indexes content into FAISS vector store using LangChain.
 
 **Test with Swagger:**
