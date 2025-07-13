@@ -260,7 +260,7 @@ Filter messages by tag like `calendar`, `greeting`, `unrelated`, etc.
 
 ```json
 {
-  "new_tag": "important"
+  "tag": "important"
 }
 ```
 
