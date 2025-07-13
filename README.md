@@ -158,6 +158,17 @@ POST /chat/gemini
 POST /upload_docs/
 
 GET /calendar/user_events/{user_id}... and more!
+
+✅ 7. Example cURL Test
+       
+        curl -X 'POST' \
+          'http://localhost:8000/chat/gemini' \
+          -H 'accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -d '{
+          "user_id": "test123",
+          "message": "What is the lowest rent available?"
+        }'
 ---
 
 ## 🧪 Testing Endpoints
