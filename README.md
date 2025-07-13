@@ -288,18 +288,27 @@ Used for development and testing resets.
 
 ### ⚙️ Internal Design Limits
 
-📌 Org Boundaries: Agent only responds to rent, CRM, calendar, and uploaded document topics.
-
-🌐 Language Handling: Automatically translates non-English inputs to English using langdetect & deep-translator, but:
-
-If the original message is under 20 characters, translation is skipped to preserve intent.
-
-🧠 Out-of-Scope Filtering: Uses Gemini + fallback heuristics to detect unsupported queries.
-
-🗓️ Calendar Conflict Check: New event creation is blocked if time overlaps with existing events.
-
-🧠 RAG Scope: check_scope_with_context() uses Gemini to determine if retrieved chunks can answer the question.
-
+    📌 Org Boundaries: Agent only responds to rent, CRM, calendar, and uploaded document topics.
+    
+    🌐 Language Handling: Automatically translates non-English inputs to English using langdetect & deep-translator, but:
+    
+         ✅ Purpose of the Limit:
+         Preserves original message without translating if it’s too short.
+         
+         Avoids misclassification of language for very short messages.
+         
+         Ensures greetings like "Hi" don’t become "Ciao" (Italian) by accident.
+         
+         🚫 Limitation Introduced:
+         If a valid short query under 6 characters is sent (e.g., "rent?"), the system might skip translation, which could affect understanding in non-English languages.
+         
+         This limit is a trade-off between translation accuracy and maintaining user intent for short inputs.
+    
+    🧠 Out-of-Scope Filtering: Uses Gemini + fallback heuristics to detect unsupported queries.
+    
+    🗓️ Calendar Conflict Check: New event creation is blocked if time overlaps with existing events.
+    
+    🧠 RAG Scope: check_scope_with_context() uses Gemini to determine if retrieved chunks can answer the question.
 
 ---
 
