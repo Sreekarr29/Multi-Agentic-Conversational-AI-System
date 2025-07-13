@@ -110,27 +110,133 @@ Upload a supported file and check for `"File uploaded and processed successfully
 
 ---
 
-## 🧪 Testing Endpoints
+🧪 Testing Endpoints
+Use Swagger UI at http://localhost:8000/docs or test via Postman using the examples below:
 
-Use Swagger at `http://localhost:8000/docs` or Postman with the following:
-
-```http
+📬 Chat with Gemini (RAG + Calendar + Language Support)
 POST /chat/gemini
+
+json
+Copy
+Edit
 {
   "user_id": "test123",
   "message": "What is the lowest rent for Broadway properties?"
 }
-```
+Calendar scheduling (with conflict check)
 
-```http
+json
+Copy
+Edit
+{
+  "user_id": "test123",
+  "message": "Schedule a meeting with John tomorrow at 3pm"
+}
+Greeting intent
+
+json
+Copy
+Edit
+{
+  "user_id": "test123",
+  "message": "Hi there!"
+}
+Multi-language input (translated automatically)
+
+json
+Copy
+Edit
+{
+  "user_id": "test123",
+  "message": "Hola, ¿cuál es la propiedad más barata?"
+}
+📤 Upload Documents (PDF, TXT, CSV, DOCX)
 POST /upload_docs/
-Form-data:
-  file: sample.csv
-```
+Form-Data:
 
-```http
+file: (choose file like sample.csv or sample.pdf)
+
+📅 Calendar Endpoints
 GET /calendar/user_events/test123
-```
+Fetch all scheduled events for the user.
+
+POST /calendar/create_event
+
+json
+Copy
+Edit
+{
+  "user_id": "test123",
+  "title": "Team Sync",
+  "description": "Weekly sync-up",
+  "datetime": "2025-07-20T10:00:00",
+  "conversation_id": "abc-123"
+}
+PUT /calendar/update_event/<event_id>
+Update event info:
+
+json
+Copy
+Edit
+{
+  "title": "Team Sync Updated",
+  "datetime": "2025-07-21T11:00:00"
+}
+DELETE /calendar/delete_event/<event_id>
+Remove a scheduled calendar event.
+
+👤 User Endpoints
+POST /crm/create_user
+
+json
+Copy
+Edit
+{
+  "user_id": "test123",
+  "name": "Test User",
+  "email": "test@example.com"
+}
+PUT /crm/update_user/test123
+
+json
+Copy
+Edit
+{
+  "email": "updated@example.com"
+}
+DELETE /crm/delete_user/test123
+Removes user and all related data.
+
+💬 Conversation Management
+GET /crm/conversations/test123
+Get all conversations by a user.
+
+GET /crm/conversations/filter_by_tag?tag=calendar
+Filter all conversations tagged as "calendar".
+
+PUT /crm/update_tag/<conversation_id>
+
+json
+Copy
+Edit
+{
+  "new_tag": "important"
+}
+🧼 Reset the System
+POST /reset
+This will delete all:
+
+Documents
+
+Vectors
+
+Users
+
+Conversations
+
+Calendar events
+
+Use with caution in dev/testing environments.
 
 ---
 
